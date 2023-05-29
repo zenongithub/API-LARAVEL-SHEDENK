@@ -42,7 +42,6 @@ Route::post('/datasimpan', [SimpanController::class, 'getData']);
 Route::post('/hapussimpan', [SimpanController::class, 'hapusdata']);
 
 Route::post('/tambahantrian', [AntrianController::class, 'tambah']);
-// Route::post('/tambahdetailantrian', [AntrianController::class, 'tambahdetail']);
 
 Route::post('/datatransaksi', [TransaksiController::class, 'getData']);
 

@@ -26,7 +26,6 @@ class AntrianController extends Controller
 
     public function tambah(Request $request)
     {
-
         $id_produk = json_decode($request->id_produk);
         $id = $this->autoIDAn();
         $simpan = Antrian::create([
@@ -41,37 +40,16 @@ class AntrianController extends Controller
                 'id_produk'      => $id_produk[$i],
             ]);
         }
-        $hapus = Keranjang::where('id_akun', $request->id_akun)
-        ->where('id_produk',$request->id_produk)
-        ->delete();
+        $hapus = Keranjang::where('id_akun', $request->id_akun)->delete();
         
         if($simpan) {
             return response()->json([
                 'success' => "Berhasil Menambahkan Antrian",
-                'data'    => $simpan,  
+                'data'    => [$simpan],  
             ]);
         }
         return response()->json([
             'success' => false,
         ], 409);
     }
-
-    // public function tambahdetail(Request $request)
-    // {
-    //     $id = $this->autoIDAn();
-    //     $simpan = DetailAntrian::create([
-    //         'id_antrian'      => $id,
-    //         'id_produk'      => $request->id_produk,
-    //     ]);
-
-    //     if($simpan) {
-    //         return response()->json([
-    //             'success' => "Berhasil Menambahkan Detail Antrian",
-    //             'data'    => $simpan,  
-    //         ]);
-    //     }
-    //     return response()->json([
-    //         'success' => false,
-    //     ], 409);
-    // }
 }
