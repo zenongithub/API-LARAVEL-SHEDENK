@@ -9,6 +9,7 @@ use App\Http\Controllers\SimpanController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\DetailTransaksiController;
 use App\Http\Controllers\AntrianController;
+use App\Http\Controllers\PembayaranController;
 
 
 /*
@@ -41,7 +42,11 @@ Route::post('/tambahsimpan', [SimpanController::class, 'tambah']);
 Route::post('/datasimpan', [SimpanController::class, 'getData']);
 Route::post('/hapussimpan', [SimpanController::class, 'hapusdata']);
 
+Route::post('/dataantrian', [AntrianController::class, 'getdata']);
 Route::post('/tambahantrian', [AntrianController::class, 'tambah']);
+Route::post('/hapusantrian', [AntrianController::class, 'hapus']);
+
+Route::post('/tambahpembayaran', [PembayaranController::class, 'add']);
 
 Route::post('/datatransaksi', [TransaksiController::class, 'getData']);
 

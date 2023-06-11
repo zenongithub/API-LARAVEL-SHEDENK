@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class AntrianController extends Controller
 {
+    public function getdata(Request $request)
+    {
+        $data = Antrian::where('id_akun', $request->id_akun)
+                        ->get();
+
+        return response()->json($data);
+    }
     public function autoIDAn() 
     {
         $datas;
@@ -31,6 +38,7 @@ class AntrianController extends Controller
         $simpan = Antrian::create([
             'id_antrian'      => $id,
             'total_harga'      => $request->total_harga,
+            'total_barang'      => $request->total_barang,
             'id_akun'        => $request->id_akun,
         ]);
 
@@ -51,5 +59,19 @@ class AntrianController extends Controller
         return response()->json([
             'success' => false,
         ], 409);
+    }
+    public function hapus(Request $request)
+    {
+
+        $hapus = DetailAntrian::where('id_antrian',$request->id_antrian)
+        ->delete();
+
+        $hapus = Antrian::where('id_akun', $request->id_akun)
+        ->where('id_antrian',$request->id_antrian)
+        ->delete();
+
+        return response()->json([
+            "pesan" => 'Berhasil Menghapus'
+        ]);
     }
 }

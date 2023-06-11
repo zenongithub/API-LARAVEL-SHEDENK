@@ -11,7 +11,4 @@ class Transaksi extends Model
 
     protected $table = 'transaksi';
 
-    public function produk(){
-        return $this->hasOne(ProdukModel::class, 'id_produk', 'id_produk');
-    }
 }
