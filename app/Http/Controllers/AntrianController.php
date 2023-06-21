@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Antrian;
 use App\Models\DetailAntrian;
+use App\Models\BuktiPembayaran;
 use App\Models\Keranjang;
 use Illuminate\Http\Request;
 
@@ -69,6 +70,8 @@ class AntrianController extends Controller
         $hapus = Antrian::where('id_akun', $request->id_akun)
         ->where('id_antrian',$request->id_antrian)
         ->delete();
+
+        $hapus = BuktiPembayaran::where('id_antrian', $request->id_antrian)->delete();
 
         return response()->json([
             "pesan" => 'Berhasil Menghapus'

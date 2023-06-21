@@ -47,6 +47,7 @@ Route::post('/tambahantrian', [AntrianController::class, 'tambah']);
 Route::post('/hapusantrian', [AntrianController::class, 'hapus']);
 
 Route::post('/tambahpembayaran', [PembayaranController::class, 'add']);
+Route::post('/gambarpembayaran', [PembayaranController::class, 'datagambar']);
 
 Route::post('/datatransaksi', [TransaksiController::class, 'getData']);
 

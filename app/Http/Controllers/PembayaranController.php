@@ -8,8 +8,16 @@ class PembayaranController extends Controller
 {
     public function add(Request $request){
 
+        $cekdata = BuktiPembayaran::where('id_antrian', $request->id_antrian)->first();
+
+        if($cekdata){
+            return response()->json([
+                "success" => "bukti pembayaran sudah ada",
+            ]);
+        }
+
             $gambar = $request->file('gambar');
-            $simpan = BuktiPembayaran::insert([
+            $simpan = BuktiPembayaran::create([
                 'id_antrian' => $request->id_antrian,
                 'nama_pembayaran' => $gambar->getClientOriginalName(),
             ]);
@@ -19,11 +27,17 @@ class PembayaranController extends Controller
             if($simpan) {
                 return response()->json([
                     'success' => "Berhasil Menambahkan",
-                    'data'    => $simpan,  
+                    'data'    => [$simpan],  
                 ]);
             }
             return response()->json([
                 'success' => false,
             ], 409);
+    }
+    function datagambar(Request $request){
+        $data = BuktiPembayaran::where('id_antrian', $request->id_antrian)
+        ->get();
+
+        return response()->json($data);
     }
 }
